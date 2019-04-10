@@ -1,0 +1,1 @@
+chay "pip install -r requirements.txt" o cmd de install cac package can thiet
