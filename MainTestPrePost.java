@@ -1,12 +1,7 @@
-package ca.pfv.spmf.test;
-
-
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
-import PrePost;
 
 /**
  * Example of how to use PrePost algorithm from the source code.
@@ -14,12 +9,12 @@ import PrePost;
  */
 public class MainTestPrePost {
 
-	public static void main(String [] arg) throws IOException{
+	public static void main(String [] args) throws IOException{
 
-		String input = fileToPath("contextPasquier99.txt");
+		String input = fileToPath(args[0]);
 		String output = ".//output.txt";  // the path for saving the frequent itemsets found
 
-		double minsup = 0; // means a minsup of 2 transaction (we used a relative support)
+		double minsup = Double.parseDouble(args[1]); // means a minsup of 2 transaction (we used a relative support)
 
 		// Applying the algorithm
 		PrePost prepost = new PrePost();

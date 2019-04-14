@@ -1,5 +1,3 @@
-package ca.pfv.spmf.algorithms.frequentpatterns.fin_prepost;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -10,8 +8,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import ca.pfv.spmf.tools.MemoryLogger;
 
 /*
  * Copyright (c) 2008-2015 ZHIHONG DENG
@@ -33,10 +29,10 @@ import ca.pfv.spmf.tools.MemoryLogger;
  */
 /**
  * Java implementation of the PrePost/PrePost+ algorithm.
- * 
+ *
  * This implementation was obtained by converting the original C++ code of
  * Prepost by ZHIHONG DENG  to Java.
- * 
+ *
  * @author Philippe Fournier-Viger
  */
 public class PrePost {
@@ -75,7 +71,7 @@ public class PrePost {
 	public int[] itemsetCount;
 	public int[] sameItems;
 	public int nlNodeCount;
-	
+
 	// if this parameter is set to true, the PrePost+ algorithm is run instead of PrePost
 	// (both are implemented in this file, because they have similarities)
 	public boolean usePrePostPlus = false;
@@ -101,7 +97,7 @@ public class PrePost {
 
 	/**
 	 * Run the algorithm
-	 * 
+	 *
 	 * @param filename
 	 *            the input file path
 	 * @param minsup
@@ -185,7 +181,7 @@ public class PrePost {
 
 	/**
 	 * Build the tree
-	 * 
+	 *
 	 * @param filename
 	 *            the input filename
 	 * @throws IOException
@@ -385,7 +381,7 @@ public class PrePost {
 
 	/**
 	 * Read the input file to find the frequent items
-	 * 
+	 *
 	 * @param filename
 	 *            input file name
 	 * @param minSupportAbsolute
@@ -594,7 +590,7 @@ public class PrePost {
 	/**
 	 * This method write an itemset to file + all itemsets that can be made
 	 * using its node list.
-	 * 
+	 *
 	 * @param curNode
 	 *            the current node
 	 * @param sameCount
@@ -607,10 +603,10 @@ public class PrePost {
 
 		// create a stringuffer
 		StringBuilder buffer = new StringBuilder();
-		
+
 		if(curNode.support >= minSupport) {
 			outputCount++;
-	
+
 			// append items from the itemset to the StringBuilder
 			for (int i = 0; i < resultLen; i++) {
 				buffer.append(item[result[i]].index);
