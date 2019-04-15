@@ -7,8 +7,8 @@ Cách chạy thuật toán
 
 2. Prepost:
 -javac MainTestPrePost.java
--java FPtest "file_input" "threshold"
+-java MainTestPrePost "file_input" "threshold"
 
 3. Prepost+:
 -javac MainTestPrePostPlus.java
--java FPtest "file_input" "threshold"
+-java MainTestPrePostPlus "file_input" "threshold"
