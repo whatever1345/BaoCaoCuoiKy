@@ -613,7 +613,7 @@ public class PrePost {
 				buffer.append(' ');
 			}
 			// append the support of the itemset
-			buffer.append("#SUP: ");
+			buffer.append(": ");
 			buffer.append(curNode.support);
 			buffer.append("\n");
 		}
@@ -638,7 +638,7 @@ public class PrePost {
 						// newSet.add(item[sameItems[j]].index);
 					}
 				}
-				buffer.append("#SUP: ");
+				buffer.append(": ");
 				buffer.append(curNode.support);
 				buffer.append("\n");
 				outputCount++;

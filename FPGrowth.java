@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,9 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 public class FPGrowth {
+    //record time
+    public long startTimestamp;
+	public long endTimestamp;
+    public int outputCount = 0;
+
     public double threshold;
 	private double MIN_SUPPORT;
-
+    private int numOfTrans;
 	/**
 	 *
 	* @Title: itemSort
@@ -56,7 +62,7 @@ public class FPGrowth {
 			}
 		}
 
-        MIN_SUPPORT = threshold * itemSet.size();
+        MIN_SUPPORT = threshold * numOfTrans;
         MIN_SUPPORT = Math.ceil(MIN_SUPPORT);
 
 		Iterator<String> ite = itemMap.keySet().iterator();
@@ -174,7 +180,14 @@ public class FPGrowth {
 	* @return void
 	* @throws
 	 */
-	public void FPAlgo(ArrayList<ArrayList<String>> itemSet, ArrayList<String> candidatePattern) {
+
+    public BufferedWriter writer = null;
+
+	public void FPAlgo(ArrayList<ArrayList<String>> itemSet, ArrayList<String> candidatePattern) throws IOException {
+        MemoryLogger.getInstance().reset();
+
+        StringBuilder buffer = new StringBuilder();
+
 		// build head table
 		ArrayList<FPTreeNode> head = buildHeadTable(itemSet);
 
@@ -191,10 +204,19 @@ public class FPGrowth {
 			for(FPTreeNode tn : head) {
 				for(String s : candidatePattern) {
 					System.out.print(s + " ");
+                    buffer.append(s);
+                    buffer.append(' ');
 				}
-				System.out.println(tn.getItem() + ":" + tn.getCounts());
+				System.out.println(tn.getItem() + " : " + tn.getCounts());
+                buffer.append(tn.getItem());
+                buffer.append(" : ");
+                buffer.append(tn.getCounts());
+                buffer.append("\n");
+                outputCount++;
 			}
+            writer.write(buffer.toString());
 		}
+
 
 		for(FPTreeNode hd : head) {
 			ArrayList<String> pattern = new ArrayList<String>();
@@ -226,9 +248,7 @@ public class FPGrowth {
             // recursive process
 			FPAlgo(newItemSet, pattern);
 
-			while(null != curNode) {
-
-			}
+            MemoryLogger.getInstance().checkMemory();
 		}
 	}
 
@@ -257,6 +277,19 @@ public class FPGrowth {
 				dataSet.add(tmpList);
 			}
 		}
+        numOfTrans = dataSet.size();
 		return dataSet;
+	}
+
+    public void printStats() {
+		System.out.println("========== Frequent Pattern - STATS ============");
+		System.out.println(" Minsup = " + threshold
+				+ "\n Number of transactions: " + numOfTrans);
+		System.out.println(" Number of frequent  itemsets: " + outputCount);
+		System.out.println(" Total time ~: " + (endTimestamp - startTimestamp)
+				+ " ms");
+		System.out.println(" Max memory:"
+				+ MemoryLogger.getInstance().getMaxMemory() + " MB");
+		System.out.println("=====================================");
 	}
 }

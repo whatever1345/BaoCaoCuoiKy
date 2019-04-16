@@ -12,3 +12,5 @@ Cách chạy thuật toán
 3. Prepost+:
 -javac MainTestPrePostPlus.java
 -java MainTestPrePostPlus "file_input" "threshold"
+
+Output là output.txt
