@@ -203,11 +203,9 @@ public class FPGrowth {
 		if(null != candidatePattern) {
 			for(FPTreeNode tn : head) {
 				for(String s : candidatePattern) {
-					System.out.print(s + " ");
                     buffer.append(s);
                     buffer.append(' ');
 				}
-				System.out.println(tn.getItem() + " : " + tn.getCounts());
                 buffer.append(tn.getItem());
                 buffer.append(" : ");
                 buffer.append(tn.getCounts());
